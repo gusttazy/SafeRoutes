@@ -1,20 +1,37 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { PaperProvider, DefaultTheme } from 'react-native-paper';
+import { useFonts } from '@expo-google-fonts/montserrat';
+import theme from './src/theme/theme';
+import Routes from './src/routes'; // Importe a configuração das rotas
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    'Montserrat-Regular': require('@expo-google-fonts/montserrat/Montserrat_400Regular.ttf'),
+    'Montserrat-Bold': require('@expo-google-fonts/montserrat/Montserrat_700Bold.ttf'),
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
+  const appTheme = {
+    ...DefaultTheme,
+    typography: {
+      regular: {
+        fontFamily: 'Montserrat-Regular',
+        fontWeight: 'normal',
+      },
+      bold: {
+        fontFamily: 'Montserrat-Bold',
+        fontWeight: 'bold',
+      },
+    },
+    colors: theme.colors,
+  };
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <PaperProvider theme={appTheme}>
+      <Routes /> {/* Componente de navegação com todas as rotas */}
+    </PaperProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
