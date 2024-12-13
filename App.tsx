@@ -2,7 +2,7 @@ import React from 'react';
 import { PaperProvider, DefaultTheme } from 'react-native-paper';
 import { useFonts } from '@expo-google-fonts/montserrat';
 import theme from './src/theme/theme';
-import Routes from './src/routes'; // Importe a configuração das rotas
+import Routes from './src/routes'; 
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -31,7 +31,7 @@ export default function App() {
 
   return (
     <PaperProvider theme={appTheme}>
-      <Routes /> {/* Componente de navegação com todas as rotas */}
+      <Routes /> 
     </PaperProvider>
   );
 }
